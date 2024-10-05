@@ -88,7 +88,7 @@ def CAPNO(split, data_path = "data/dataverse_files capno/data/mat/*8min*", sampl
         #print(f'Deleting temporary dataframe {time_elapsed(start)} elapsed.')
         else: pass
 
-        return df_ppg_overlap_multi, df_ecg_overlap_multi
+    return df_ppg_overlap_multi, df_ecg_overlap_multi
 
 def WESAD(split, data_path = "data/WESAD/S", ppg_sampling_rate = 64, ecg_sampling_rate = 700, window_size =512):
     df_ppg_overlap_multi = []; df_ecg_overlap_multi = []
@@ -108,7 +108,7 @@ def WESAD(split, data_path = "data/WESAD/S", ppg_sampling_rate = 64, ecg_samplin
                 resampled_ppg = scipy.signal.resample(pleth_6, int(len(pleth_6)/ppg_sampling_rate*128), t=None, axis=0, window=None, domain='time')
                 resampled_ecg = scipy.signal.resample(ecg, int(len(ecg)/ecg_sampling_rate*128), t=None, axis=0, window=None, domain='time')
                 
-                df_ppg_overlap,df_ecg_overlap = process(resampled_ppg,resampled_ecg,window_size)
+                df_ppg_overlap,df_ecg_overlap = process(resampled_ppg.flatten(),resampled_ecg.flatten(),window_size)
 
                 df_ppg_overlap_multi+=df_ppg_overlap; df_ecg_overlap_multi+=df_ecg_overlap
             
@@ -135,7 +135,7 @@ def DALIA(split, data_path = "data/PPG-DaLiA/PPG_FieldStudy/S", ppg_sampling_rat
                 resampled_ppg = scipy.signal.resample(pleth_6, int(len(pleth_6)/ppg_sampling_rate*128), t=None, axis=0, window=None, domain='time')
                 resampled_ecg = scipy.signal.resample(ecg, int(len(ecg)/ecg_sampling_rate*128), t=None, axis=0, window=None, domain='time')
                 
-                df_ppg_overlap,df_ecg_overlap = process(resampled_ppg,resampled_ecg,window_size)
+                df_ppg_overlap,df_ecg_overlap = process(resampled_ppg.flatten(),resampled_ecg.flatten(),window_size)
                 
                 df_ppg_overlap_multi+=df_ppg_overlap; df_ecg_overlap_multi+=df_ecg_overlap
             
